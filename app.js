@@ -9,10 +9,11 @@ const paymentRoute = require('./routes/paymentRoute');
 
 // Use CORS to allow requests from your frontend
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow only your frontend origin
+    origin: ['http://localhost:3000', 'https://trafywebsite-backend-865611889264.us-central1.run.app'], // Allow both local and GCP origins
     methods: 'GET,POST',
     allowedHeaders: 'Content-Type,Authorization',
 }));
+
 
 app.use(express.json()); // To parse JSON bodies
 app.use('/api', paymentRoute);
