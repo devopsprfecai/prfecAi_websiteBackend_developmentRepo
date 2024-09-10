@@ -6,6 +6,9 @@ const razorpayInstance = new Razorpay({
     key_secret: RAZORPAY_SECRET_KEY
 });
 
+console.log('Razorpay Key:', process.env.RAZORPAY_ID_KEY);
+
+
 const createOrder = async (req, res) => {
     try {
         const { amount, name, description, type } = req.body;
