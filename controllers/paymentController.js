@@ -130,7 +130,7 @@ const sendPaymentEmail = async (req, res) => {
 
 const createSessionCookie = async (req, res) => {
     const { idToken } = req.body;
-    console.log(idToken)  
+    // console.log(idToken)  
     const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
 
     try {
@@ -316,13 +316,19 @@ const verifyToken = async (req, res) => {
     }
 };
 
-const clearSessionCookie = (req, res) => {
+const clearSessionCookie = async (req, res) => {
     try {
         const { clearSession } = req.body;
 
+        // Check if session cookie exists in the request headers
+        const sessionCookie = req.cookies.session;
+        if (!sessionCookie) {
+            return res.status(401).json({ success: false, message: 'Unauthorized: No session cookie found' });
+        }
+
         // If the request is asking to clear the session
         if (clearSession) {
-            // Clear the session cookie by setting it to an empty value and expiring it immediately
+            // Clear the session cookie
             res.clearCookie('session', { path: '/' });
             return res.status(200).json({ success: true, message: 'Session cookie cleared' });
         }

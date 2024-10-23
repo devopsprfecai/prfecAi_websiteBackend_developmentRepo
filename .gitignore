@@ -1,0 +1,14 @@
+# Node modules folder (commonly ignored)
+node_modules/
+
+# Environment variables file
+.env
+
+# Firebase service account key
+config/serviceAccountKey.json
+
+# Firebase admin config file
+firebaseAdmin.js
+
+# Optional: Ignore log files
+*.log
