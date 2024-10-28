@@ -10,6 +10,7 @@ const paymentController=require('./controllers/paymentController');
 
 // Firebase Admin
 const admin = require('./firebaseAdmin');
+const PORT = process.env.PORT || 5000;
 
 // Use CORS to allow requests from your frontend
 app.use(cors({
@@ -36,6 +37,6 @@ app.use(async (req, res, next) => {
     }
 });
 
-http.listen(5000, function(){
-    console.log('Server is running on port 5000');
+http.listen(PORT, function(){
+    console.log(`Server is running on port ${PORT}`);
 });
