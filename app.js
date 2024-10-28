@@ -36,6 +36,6 @@ app.use(async (req, res, next) => {
     }
 });
 
-http.listen(5000, function(){
+http.listen(5002, function(){
     console.log('Server is running on port 5000');
 });
