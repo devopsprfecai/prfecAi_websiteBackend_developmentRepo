@@ -4,7 +4,7 @@ const { RAZORPAY_ID_KEY, RAZORPAY_SECRET_KEY, GMAIL_USER, GMAIL_PASS } = process
 
 
 
-const admin = require('../firebaseAdmin');
+const admin = require('../firebaseAdmin'); 
 
 
 const razorpayInstance = new Razorpay({
