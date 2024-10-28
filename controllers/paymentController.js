@@ -4,7 +4,7 @@ const { RAZORPAY_ID_KEY, RAZORPAY_SECRET_KEY, GMAIL_USER, GMAIL_PASS } = process
 
 
 
-const admin = require('../firebaseAdmin'); 
+const admin = require('../firebaseAdmin');
 
 
 const razorpayInstance = new Razorpay({
@@ -102,31 +102,6 @@ const sendPaymentEmail = async (req, res) => {
 };
 
 
-// const createSessionCookie = async (req, res) => {
-//     const { idToken } = req.body;
-//     console.log(idToken)  
-//     const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
-
-//     try {
-//         const sessionCookie = await admin.auth().createSessionCookie(idToken, { expiresIn });
-//         console.log(sessionCookie)
-
-//         // Set cookie options
-//         const options = {
-//             maxAge: expiresIn, // Session expiration time
-//             httpOnly: true, // The cookie is not accessible via JavaScript
-//             secure: false, // Set to true in production (HTTPS only), false for local development
-//             domain: 'localhost', // Set domain to 'localhost' for local testing
-//             sameSite: 'None' // Required to allow cross-domain cookies  
-//         };
-
-//         res.cookie('session', sessionCookie, options);
-//         res.status(200).json({ success: true, message: 'Session cookie created successfully' });
-//     } catch (error) {
-//         console.error('Error creating session cookie:', error);
-//         res.status(401).send('Unauthorized request');
-//     }
-// };
 
 const createSessionCookie = async (req, res) => {
     const { idToken } = req.body;
@@ -155,72 +130,7 @@ const createSessionCookie = async (req, res) => {
     }
 };
 
-// const getSessionCookie = (req, res) => {
-//     try {
-//         const session = global.sessionCookie; // Read the session cookie from request headers\
-//         console.log("sessionnn",global.sessionCookie);
-//         if (!session) {
-//             return res.status(401).json({ success: false, message: 'No session cookie found' });
-//         }
 
-//         console.log("Session cookie retrieved:", session);
-
-//         // Return the session cookie correctly in JSON format
-//         res.status(200).json({ success: true, session });
-//     } catch (error) {
-//         console.error('Error retrieving session cookie:', error);
-//         res.status(500).json({ success: false, message: 'Error retrieving session cookie' });
-//     }
-// };
-
-// const getSessionCookie = async (req, res) => {
-//     try {
-//         const session = global.sessionCookie; // Read the session cookie from request headers
-//         console.log("Session value:", session);
-
-//         if (!session) {
-//             return res.status(401).json({ success: false, message: 'No session cookie found' });
-//         }
-
-//         const decodedClaims = await admin.auth().verifySessionCookie(session, true);
-//         const uid = decodedClaims.uid; 
-//         console.log("Decoded UID:", uid);
-
-//         // Access Realtime Database with admin SDK
-//         const userRef = admin.database().ref('usersData/' + uid);
-//         const snapshot = await userRef.once('value');
-
-//         let profilePicURL = '';
-//         if (snapshot.exists()) {
-//             const userData = snapshot.val();
-//             console.log("User Data:", userData); // Log the entire user data
-
-//             const profilePicPath = userData.profilePicPath; // Retrieve the storage path
-//             if (profilePicPath) {
-//                 // Construct the public URL directly from the storage path
-//                 profilePicURL = profilePicPath.replace('gs://', 'https://storage.googleapis.com/'); // Convert to public URL
-//             }
-//         } else {
-//             console.log("No user data found for UID:", uid);
-//         }
-
-//         console.log("Profile Picture URL:", profilePicURL); // Print the profile picture URL
-
-//         res.status(200).json({
-//             success: true,
-//             email: decodedClaims.email,
-//             profilePicURL: profilePicURL
-//         });
-
-//     } catch (error) {
-//         console.error('Error retrieving session cookie:', error);
-//         res.status(500).json({ success: false, message: 'Error retrieving session cookie' });
-//     }
-// };
-
-
-
-// Usage example
 
 const bucket = admin.storage().bucket();
 
