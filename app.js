@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 // Use CORS to allow requests from your frontend
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001','https://trafywebsite-backend-865611889264.us-central1.run.app', 'https://trafyai.com'], // Allow both local and GCP origins
+    origin: ['http://localhost:3000', 'http://localhost:3001'], // Allow both local and GCP origins
     methods: 'GET,POST',
     allowedHeaders: 'Content-Type,Authorization',
     credentials: true, // Allow credentials (cookies)
@@ -37,6 +37,6 @@ app.use(async (req, res, next) => {
     }
 });
 
-app.listen(PORT, function(){
+app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);
 });
