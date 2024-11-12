@@ -15,9 +15,9 @@ const PORT = 6000;
 // Use CORS to allow requests from your frontend
 app.use(cors({
     origin: ['http://localhost:3000', 'http://localhost:3001','https://trafy-newbackend-255821839155.us-central1.run.app','https://trafy.ai/','https://blog.trafy.ai/'], // Allow both local and GCP origins
-    methods: 'GET,POST',
-    allowedHeaders: 'Content-Type,Authorization',
-    credentials: true, // Allow credentials (cookies)
+    methods: ['GET', 'POST', 'OPTIONS'], // Include OPTIONS for preflight
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
 }));
 
 app.use(cookieParser());  // Parse cookies
