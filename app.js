@@ -21,6 +21,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 app.use(cookieParser());  // Parse cookies
 app.use(express.json());  // To parse JSON bodies
 app.use('/api', paymentRoute);
