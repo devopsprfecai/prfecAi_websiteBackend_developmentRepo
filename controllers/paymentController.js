@@ -114,14 +114,19 @@ const createSessionCookie = async (req, res) => {
 
         // Set cookie options
         const options = {
-            maxAge: expiresIn, // Session expiration time
-            httpOnly: true, // The cookie is not accessible via JavaScript
-            secure: process.env.NODE_ENV === 'production', // Set to true in production (HTTPS only)
-            domain: 'localhost', // Set domain to 'localhost' for local testing
-            sameSite: 'None' // Required to allow cross-domain cookies  
+            maxAge: expiresIn,
+            httpOnly: true,
+            secure: true, // Always use secure in production
+            sameSite: 'None',
+            path: '/',
+            domain: process.env.NODE_ENV === 'production' ? '.trafy.ai' : 'localhost'
         };
-        res.setHeader('Set-Cookie', `session=${sessionCookie}; Max-Age=${expiresIn}; HttpOnly; Secure=${options.secure}; SameSite=None; Path=/; Domain=localhost`);
-        // res.setHeader('Set-Cookie', `session=${sessionCookie}; Max-Age=${expiresIn}; HttpOnly; Secure=${options.secure}; SameSite=None; Path=/; Domain=localhost`);
+        res.cookie('session', sessionCookie, options);
+        
+        // Set CORS headers explicitly
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+        
         res.status(200).json({ success: true, message: 'Session cookie created successfully' });
         
     } catch (error) {
