@@ -12,29 +12,34 @@ const paymentController=require('./controllers/paymentController');
 const admin = require('./firebaseAdmin');
 const PORT = 6000;
 
-const corsOptions = {
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'http://localhost:3000',
-            'http://localhost:3001',
-            'https://trafy.ai',
-            'https://blog.trafy.ai'
-        ];
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         const allowedOrigins = [
+//             'http://localhost:3000',
+//             'http://localhost:3001',
+//             'https://trafy.ai',
+//             'https://blog.trafy.ai'
+//         ];
+
         
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-    credentials: true,
-    maxAge: 86400 // 24 hours
-};
+//         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+//     credentials: true,
+//     maxAge: 86400 // 24 hours
+// };
 
-
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: ['http://localhost:3000','http://localhost:3001',
+            ,'https://trafy.ai','https://blog.trafy.ai/'], // Allow both local and GCP origins
+    methods: 'GET,POST',
+    allowedHeaders: 'Content-Type,Authorization',
+}));
 
 app.use(cookieParser());  // Parse cookies
 app.use(express.json());  // To parse JSON bodies
