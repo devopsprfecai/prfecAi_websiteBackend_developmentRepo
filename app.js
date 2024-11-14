@@ -35,13 +35,6 @@ const corsOptions = {
 
 
 app.use(cors(corsOptions));
-app.options('*', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', req.header('origin') || '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.status(204).send();
-});
 
 app.use(cookieParser());  // Parse cookies
 app.use(express.json());  // To parse JSON bodies
