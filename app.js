@@ -16,7 +16,7 @@ const PORT =6000;
 
 const corsOptions = {
     origin: ['http://localhost:3000', 'http://localhost:3001', 'https://trafy-websiteclone-865611889264.us-central1.run.app', 'https://trafy-blogclone-865611889264.us-central1.run.app',
-        'https://trafy.ai/','https://blog.trafy.ai/'],
+        'https://trafy.ai','https://blog.trafy.ai'],
 
     methods: ['GET', 'POST', 'OPTIONS'], // Include OPTIONS for preflight
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'], // Include necessary headers
