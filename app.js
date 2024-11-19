@@ -10,7 +10,7 @@ const paymentController=require('./controllers/paymentController');
 
 // Firebase Admin
 const admin = require('./firebaseAdmin');
-const PORT =6000;
+const PORT =5000;
 
 
 
