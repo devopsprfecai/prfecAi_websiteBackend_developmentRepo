@@ -15,7 +15,7 @@ const PORT =6000;
 
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'https://trafy-websiteclone-865611889264.us-central1.run.app', 'https://trafy-blogclone-865611889264.us-central1.run.app',
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'https://trafy-websiteclone-865611889264.us-central1.run.app/', 'https://trafy-blogclone-865611889264.us-central1.run.app/',
         'https://trafy.ai','https://blog.trafy.ai'],
 
     methods: ['GET', 'POST', 'OPTIONS'], // Include OPTIONS for preflight
@@ -25,7 +25,7 @@ const corsOptions = {
     exposedHeaders: ['Set-Cookie'], // Allow client to read Set-Cookie header
 };
 
-app.use('*',cors(corsOptions))
+app.use(cors(corsOptions))
 app.use(cookieParser());  // Parse cookies
 app.use(express.json());  // To parse JSON bodies
 app.use('/api', paymentRoute);
