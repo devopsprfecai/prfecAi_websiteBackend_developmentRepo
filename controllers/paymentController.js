@@ -106,7 +106,7 @@ const sendPaymentEmail = async (req, res) => {
 
 const createSessionCookie = async (req, res) => {
     const { idToken } = req.body;
-    // console.log(idToken)  
+    console.log(idToken)  
     const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
 
     try {

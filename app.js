@@ -15,17 +15,33 @@ const PORT =6000;
 
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'https://trafy-websiteclone-865611889264.us-central1.run.app', 'https://trafy-blogclone-865611889264.us-central1.run.app',
-        'https://trafy.ai','https://blog.trafy.ai'],
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            'http://localhost:3000', 
+            'http://localhost:3001', 
+            'https://trafy-websiteclone-865611889264.us-central1.run.app', 
+            'https://trafy-blogclone-865611889264.us-central1.run.app',
+            'https://trafy.ai',
+            'https://blog.trafy.ai'
+        ];
 
-    methods: ['GET', 'POST', 'OPTIONS'], // Include OPTIONS for preflight
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'], // Include necessary headers
-    credentials: true, // Important for cookies
-    maxAge: 86400, // Cache preflight request results for 24 hours
-    exposedHeaders: ['Set-Cookie'], // Allow client to read Set-Cookie header
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, origin); // Allow the origin
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    credentials: true,
+    maxAge: 86400,
+    exposedHeaders: ['Set-Cookie'],
 };
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions)); // Preflight requests
+
 app.use(cookieParser());  // Parse cookies
 app.use(express.json());  // To parse JSON bodies
 app.use('/api', paymentRoute);
