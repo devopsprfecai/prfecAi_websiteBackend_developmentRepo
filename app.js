@@ -25,7 +25,7 @@ const corsOptions = {
     exposedHeaders: ['Set-Cookie'], // Allow client to read Set-Cookie header
 };
 
-app.use(cors(corsOptions))
+app.use('*',cors(corsOptions))
 app.use(cookieParser());  // Parse cookies
 app.use(express.json());  // To parse JSON bodies
 app.use('/api', paymentRoute);
