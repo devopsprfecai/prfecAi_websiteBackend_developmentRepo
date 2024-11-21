@@ -27,24 +27,21 @@ const corsOptions = {
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
-    exposedHeaders: ['Set-Cookie'],
 };
 
-// Apply CORS middleware
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Preflight requests
-
-// Custom middleware to inject CORS headers (optional)
 app.use((req, res, next) => {
-    const origin = req.headers.origin || '';
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
+    if (req.method === 'OPTIONS') {
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.sendStatus(204);
+    } else {
+        next();
     }
-    next();
 });
 
-// Middleware
 app.use(cookieParser());
 app.use(express.json());
 
@@ -53,10 +50,10 @@ app.use('/api', require('./routes/paymentRoute'));
 
 // Middleware to verify session cookies
 app.use(async (req, res, next) => {
-    const sessionCookie = req.cookies.session || ''; // Get session cookie
+    const sessionCookie = req.cookies.session || '';
     try {
         const decodedClaims = await admin.auth().verifySessionCookie(sessionCookie, true);
-        req.user = decodedClaims; // Attach user information to request
+        req.user = decodedClaims;
         next();
     } catch (error) {
         res.status(401).send('Unauthorized');
