@@ -12,21 +12,19 @@ const paymentController=require('./controllers/paymentController');
 const admin = require('./firebaseAdmin');
 const PORT =6000;
 
-
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://trafy-websiteclone-865611889264.us-central1.run.app',
+    'https://trafy-blogclone-865611889264.us-central1.run.app',
+    'https://trafy.ai',
+    'https://blog.trafy.ai',
+];
 
 const corsOptions = {
     origin: (origin, callback) => {
-        const allowedOrigins = [
-            'http://localhost:3000', 
-            'http://localhost:3001', 
-            'https://trafy-websiteclone-865611889264.us-central1.run.app', 
-            'https://trafy-blogclone-865611889264.us-central1.run.app',
-            'https://trafy.ai',
-            'https://blog.trafy.ai'
-        ];
-
         if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, origin); // Allow the origin
+            callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
@@ -34,7 +32,6 @@ const corsOptions = {
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
     credentials: true,
-    maxAge: 86400,
     exposedHeaders: ['Set-Cookie'],
 };
 
@@ -44,6 +41,16 @@ app.options('*', cors(corsOptions)); // Preflight requests
 
 app.use(cookieParser());  // Parse cookies
 app.use(express.json());  // To parse JSON bodies
+
+app.use((req, res, next) => {
+    const origin = req.headers.origin || '';
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
+    next();
+});
+
 app.use('/api', paymentRoute);
 
 
