@@ -19,6 +19,7 @@ const allowedOrigins = [
     'https://trafy-blogclone-865611889264.us-central1.run.app',
     'https://trafy.ai',
     'https://blog.trafy.ai',
+    'https://trafy-newbackend-255821839155.us-central1.run.app',
 ];
 
 const corsOptions = {
