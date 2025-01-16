@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = 5000;
+const verifySession = require('./middleware/verifySession');
 
 const allowedOrigins = [
     'http://localhost:3000',
@@ -59,6 +60,7 @@ app.use(async (req, res, next) => {
         res.status(401).send('Unauthorized');
     }
 });
+app.use(verifySession);
 
 // Start server
 app.listen(PORT, () => {
