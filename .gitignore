@@ -3,4 +3,4 @@ node_modules/
 npm-debug.log
 
 # Environment variables
-serviceAccount.json
+config/serviceAccount.json
