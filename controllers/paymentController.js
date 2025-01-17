@@ -103,7 +103,6 @@ const sendPaymentEmail = async (req, res) => {
         res.status(500).json({ success: false, msg: 'Failed to send email' });
     }
 };
-
 const sendSignInEmail = async (req, res) => {
     const { email } = req.body;
 
@@ -211,8 +210,6 @@ const sendSignInEmail = async (req, res) => {
         res.status(500).json({ success: false, msg: 'Failed to send sign-in email' });
     }
 };
-
-
 module.exports = {
     createOrder,
     sendPaymentEmail,
