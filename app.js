@@ -15,6 +15,7 @@ const allowedOrigins = [
     'https://trafy.ai',
     'https://blog.trafy.ai',
     'https://trafy-newbackend-255821839155.us-central1.run.app',
+    'https://prfec-ai-website-backend-development-repo.vercel.app/'
 ];
 
 const corsOptions = {
