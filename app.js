@@ -18,8 +18,8 @@ const allowedOrigins = [
     'https://prfec-ai-website-backend-development-repo.vercel.app/',
     'https://prfecai-websitebackend-developmentrepo-592134571427.us-central1.run.app',
     'https://prfec-ai-dev-frontend-592134571427.us-central1.run.app',
-    'https://prfec.ai/',
-    'https://app.prfec.ai/'
+    'https://prfec.ai',
+    'https://app.prfec.ai',
 
 ];
 
