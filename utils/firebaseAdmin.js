@@ -1,5 +1,12 @@
 const admin = require('firebase-admin');
-// const serviceAccount = require('../config/serviceAccount.json');
+
+// Check if required environment variables are present
+if (!process.env.FIREBASE_PROJECT_ID || 
+    !process.env.FIREBASE_CLIENT_EMAIL || 
+    !process.env.FIREBASE_PRIVATE_KEY) {
+    console.error('Firebase Admin environment variables are not set.');
+    process.exit(1); // Exit the app if secrets are missing
+}
 
 // Ensure Firebase Admin SDK is initialized only once
 if (!admin.apps.length) {

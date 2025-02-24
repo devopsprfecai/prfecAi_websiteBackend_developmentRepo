@@ -2,9 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const app = express();
-const PORT = 5000;
+// const { loadSecrets } = require('./utils/secertManager'); // Import the secret manager utility
 const verifySession = require('./middleware/verifySession');
+const app = express();
+const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
     'http://localhost:3000',
@@ -13,7 +14,7 @@ const allowedOrigins = [
     'https://trafy-blogclone-865611889264.us-central1.run.app',
     'https://trafy.ai',
     'https://blog.trafy.ai',
-    'https://trafy-newbackend-255821839155.us-central1.run.app'
+    'https://trafy-newbackend-255821839155.us-central1.run.app',
 ];
 
 const corsOptions = {
@@ -29,6 +30,7 @@ const corsOptions = {
     credentials: true,
 };
 
+// Middleware
 app.use(cors(corsOptions));
 app.use((req, res, next) => {
     if (req.method === 'OPTIONS') {
@@ -41,13 +43,11 @@ app.use((req, res, next) => {
         next();
     }
 });
-
 app.use(cookieParser());
 app.use(express.json());
 
 // Routes
 app.use('/api', require('./routes/paymentRoute'));
-
 
 // Middleware to verify session cookies
 app.use(async (req, res, next) => {
@@ -62,7 +62,15 @@ app.use(async (req, res, next) => {
 });
 app.use(verifySession);
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Start server after secrets are loaded
+(async () => {
+    try {
+         // Load secrets before starting the server
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    } catch (err) {
+        console.error('Failed to load secrets:', err);
+        process.exit(1); // Exit the application if secrets cannot be loaded
+    }
+})();
