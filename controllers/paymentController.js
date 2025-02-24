@@ -18,8 +18,8 @@ const transporter = nodemailer.createTransport({
     port: 465, // Common port for SMTP with STARTTLS
     secure: true, // Set to true for port 465 (SSL), or false for port 587 (STARTTLS)
     auth: {
-        user: 'in.trafyai@gmail.com', // Your custom email address
-        pass: 'txpg vtag rdhk sfki' // Your email password
+        user: 'devopsprfecai@gmail.com', // Your custom email address
+        pass: 'lgeg tbcr etyg srdw' // Your email password
     }
 });
 // console.log('Razorpay Key:', process.env.RAZORPAY_ID_KEY);
