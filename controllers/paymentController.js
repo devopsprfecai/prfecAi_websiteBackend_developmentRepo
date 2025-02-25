@@ -64,7 +64,7 @@ const sendSignInEmail = async (req, res) => {
 
         // Send custom sign-in email with Nodemailer
         const mailOptions = {
-            from: '"Your Project Team" <info@prfec.ai>',
+            from: 'Sign In <info@prfec.ai>',
             to: email,
             subject: 'Sign In to Your Account',
             html: `
