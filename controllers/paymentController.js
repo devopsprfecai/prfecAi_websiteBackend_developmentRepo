@@ -18,8 +18,8 @@ const transporter = nodemailer.createTransport({
     port: 465, // Common port for SMTP with STARTTLS
     secure: true, // Set to true for port 465 (SSL), or false for port 587 (STARTTLS)
     auth: {
-        user: 'prfecaimc@gmail.com', // Your custom email address
-        pass: 'cluo uyjt ucql nhod' // Your email password
+        user: 'info@prfec.ai', // Your custom email address
+        pass: 'zwap nfow xtiu fpiy' // Your email password
     }
 });
 // console.log('Razorpay Key:', process.env.RAZORPAY_ID_KEY);
@@ -32,7 +32,7 @@ const transporter = nodemailer.createTransport({
 const sendEmailNotification = async (email, subject, message) => {
     try {
         await transporter.sendMail({
-            from: '"Your Project Team" <prfecaimc@gmail.com>',
+            from: '"Your Project Team" <info@prfec.ai>',
             to: email,
             subject: subject,
             text: message
@@ -64,7 +64,7 @@ const sendSignInEmail = async (req, res) => {
 
         // Send custom sign-in email with Nodemailer
         const mailOptions = {
-            from: '"Your Project Team" <in.trafyai@gmail.com>',
+            from: '"Your Project Team" <info@prfec.ai>',
             to: email,
             subject: 'Sign In to Your Account',
             html: `
